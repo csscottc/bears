@@ -7,7 +7,7 @@ import (
 func main() {
 	bear := newBearStruct("Yogi")
 	fmt.Println("Welcome to the bears application")
-	fmt.Println(bear.name)
+	bear.printName()
 }
 
 //This is the definition of the bear structure
@@ -19,5 +19,9 @@ type bearStruct struct {
 func newBearStruct(name string) *bearStruct {
 	result := bearStruct{} //Create an instance
 	result.name = name
-	return &result //de-reference
+	return &result //de-reference (Return the bear, not the memory address)
+}
+
+func (bear *bearStruct) printName() {
+	fmt.Println(bear.name)
 }

@@ -5,40 +5,43 @@ import (
 )
 
 func main() {
-	bear := newBearStruct("Yogi")
+	bear := newBearStruct("Yogi", 42)
 	fmt.Println("Welcome to the bears application")
-	fmt.Println(*bear)
+	fmt.Println("Our bear:", *bear)
 	fmt.Println("--------------------------------")
-	bear.printName()
-	bear.printAge()
+	bear.printDetails()
+	bear.printHatStatus()
 }
 
-//bear structure
+//bear structure - bears can have a hat !
+//uses composition on animalStruct
 type bearStruct struct {
 	hasHat bool
 	animalStruct
 }
 
-//base struct for animals
+//base struct for animals - animals have a name and age.
 type animalStruct struct {
 	name string
 	age  int
 }
 
-//This is a constructor function for a bear
-func newBearStruct(name string) *bearStruct {
-	result := bearStruct{} //Create an instance
+//this is a constructor function for a bear
+func newBearStruct(name string, age int) *bearStruct {
+	result := bearStruct{} //create an instance of a bear
 	result.name = name
-	result.age = 42
+	result.age = age
 	result.hasHat = true
-	return &result //de-reference (Return the bear, not the memory address)
+	return &result //return the memory address of the bear we created !
 }
 
-func (bear *bearStruct) printName() {
-	fmt.Println("Does the bear hava hat:", bear.hasHat)
+//this adds the printHatStatus method to the bear struct
+func (bear *bearStruct) printHatStatus() {
+	fmt.Println("Does the bear have a hat? ", bear.hasHat)
 }
 
-func (animal *animalStruct) printAge() {
+//this prints some details about an animal
+func (animal *animalStruct) printDetails() {
 	fmt.Println("Name:", animal.name)
 	fmt.Println("Age:", animal.age)
 }
